@@ -71,7 +71,7 @@ namespace Gestor_de_peliculas_en_archivo_de_texto
 
         private void btn_generar_Click(object sender, EventArgs e)
         {
-            string rutaArchivo = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "PELICULAS ALMACENAS", "peliculas.txt");
+            string rutaArchivo = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "PROYECTO DE GESTOR DE PELICULAS EN ARCHIVO DE TEXTO", "peliculas.txt");
 
            
             using (StreamWriter writer = new StreamWriter(rutaArchivo))
