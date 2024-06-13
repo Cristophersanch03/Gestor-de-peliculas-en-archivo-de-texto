@@ -71,25 +71,39 @@ namespace Gestor_de_peliculas_en_archivo_de_texto
 
         private void btn_generar_Click(object sender, EventArgs e)
         {
-            string rutaArchivo = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "PROYECTO DE GESTOR DE PELICULAS EN ARCHIVO DE TEXTO", "peliculas.txt");
+            string carpetaNombre = "PELICULAS ALMACENAS";
+            string rutaCarpeta = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, carpetaNombre);
+            string rutaArchivo = Path.Combine(rutaCarpeta, "peliculas.txt");
 
-           
-            using (StreamWriter writer = new StreamWriter(rutaArchivo))
+            try
             {
-                foreach (Peliculas_class pelicula in listaPeliculas)
+                if (!Directory.Exists(rutaCarpeta))
                 {
-                    writer.WriteLine($"Título: {pelicula.Titulo}");
-                    writer.WriteLine($"Género: {pelicula.Genero}");
-                    writer.WriteLine($"Duración: {pelicula.Duracion} minutos");
-                    writer.WriteLine($"Director: {pelicula.Director}");
-                    writer.WriteLine($"Productora: {pelicula.Productora}");
-                    writer.WriteLine();
-                    writer.WriteLine();
+                    Directory.CreateDirectory(rutaCarpeta);
                 }
-            }
 
-            MessageBox.Show("Archivo creado correctamente.");
+                using (StreamWriter writer = new StreamWriter(rutaArchivo))
+                {
+                    foreach (Peliculas_class pelicula in listaPeliculas)
+                    {
+                        writer.WriteLine($"Título: {pelicula.Titulo}");
+                        writer.WriteLine($"Género: {pelicula.Genero}");
+                        writer.WriteLine($"Duración: {pelicula.Duracion} minutos");
+                        writer.WriteLine($"Director: {pelicula.Director}");
+                        writer.WriteLine($"Productora: {pelicula.Productora}");
+                        writer.WriteLine();
+                        writer.WriteLine();
+                    }
+                }
+
+                MessageBox.Show("Archivo creado correctamente.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al crear el archivo: {ex.Message}");
+            }
         }
+
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
